@@ -1,21 +1,40 @@
+//First thing I need to do is install npm packages and LOOK at documentation
+//Then I need to add process.argv[2] and process.argv[3] to take in user inputs
 //First thing I need to do is declare variable to require all the data
 //Then I need to use fs to read and write  to files
 //Then I need to make functions to call when the user enters certain arguments
-//Then I need to add process.argv[2] and process.argv[3] to take in user inputs
 
-//Take variables for user inputs
-var firstInput = process.argv[2];
+//Take the first input from the user as a command.
+//Take the second input from the user as a filter on the command
+var firstInput = process.argv[2];               //Take variables for user inputs
 var secondInput = process.argv[3];
-//add code to read and set any environment variables with the dotenv package:
-require("dotenv").config();
+
+                                               
+require("dotenv").config();                     //Get the data to process user inputs and install all packages to .json-package
 var Spotify = require('node-spotify-api');
 var Twitter = require('twitter');
 var keys = require("./keys.js");
 var request = require("request");
+var fs = require("fs");
 
-var getTweets = function(){
+
+
+
+
+
+var getSpotifySong = function(song){                     //Create Functions for each command
+    spotify.search({ type: 'track', query: song }, function(err, data) {
+        if (err) {
+          return console.log('Error occurred: ' + err);
+        }
+       
+      console.log(data); 
+      });
+};
+
+var getTweets = function(){                     //Create Functions for each command
     let client = new Twitter(keys.twitter);
-    let params = {screen_name: 'RealDonaldTrump'};//Twitter Handle
+    let params = {screen_name: 'RealDonaldTrump'};//Twitter Handle that comes in documentation
     client.get('statuses/user_timeline', params, function(error, tweets, response) {
         if (!error) {
             console.log(tweets[0].text);
@@ -54,8 +73,7 @@ var spotify = new Spotify(keys.spotify);
 
 
 //process.argv[2] then call get movie function
-//Take the first input from the user as a command.
-//Take the second input from the user as a filter on the command
+
 
 
 
