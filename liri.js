@@ -6,11 +6,11 @@
 
 //Take the first input from the user as a command.
 //Take the second input from the user as a filter on the command
-var firstInput = process.argv[2];               //Take variables for user inputs
+var firstInput = process.argv[2];                                           //Take variables for user inputs
 var secondInput = process.argv[3];
 
                                                
-require("dotenv").config();                     //Get the data to process user inputs and install all packages to .json-package
+require("dotenv").config();                                                 //Get the data to process user inputs and install all packages to .json-package
 var Spotify = require('node-spotify-api');
 var Twitter = require('twitter');
 var keys = require("./keys.js");
@@ -18,12 +18,13 @@ var request = require("request");
 var fs = require("fs");
 
 
-
-
-
-
-var getSpotifySong = function(song){                     //Create Functions for each command
-    spotify.search({ type: 'track', query: song }, function(err, data) {
+//Testing adding the songname for the query as an argument.
+// REMEBER this came from the documentation on how to set this up
+//Spotify requires keys which I am calling from another file in the root directory
+//The the example search gives use back spotify data if there is no error
+var getSpotifySong = function(songName){  
+    let spotify = new Spotify(keys.spotify);                                      //Create Functions for each command
+    spotify.search({ type: 'track', query: songName }, function(err, data) {
         if (err) {
           return console.log('Error occurred: ' + err);
         }
@@ -32,9 +33,12 @@ var getSpotifySong = function(song){                     //Create Functions for 
       });
 };
 
-var getTweets = function(){                     //Create Functions for each command
+//Testing adding the twitter handle as a user input
+//Twitter Requires that I use api keys which I am calling using a require from another file just like spotify
+//There is a parameter that needs a twitter handle argument so I am going to take that at user input and if no provided i will supply a default just like for movies
+var getTweets = function(twitterHandle){                                                 
     let client = new Twitter(keys.twitter);
-    let params = {screen_name: 'RealDonaldTrump'};//Twitter Handle that comes in documentation
+    let params = {screen_name: twitterHandle}; //Twitter Handle
     client.get('statuses/user_timeline', params, function(error, tweets, response) {
         if (!error) {
             console.log(tweets[0].text);
@@ -64,18 +68,7 @@ var getMovie = function(movieName){
 
 
 
-
-var spotify = new Spotify(keys.spotify);
-// var client = new Twitter(keys.twitter);
-
-// console.log(spotify);
-// console.log(client);
-
-
-//process.argv[2] then call get movie function
-
-
-
+//Handle the user inputs with if else statements
 
 if (firstInput === "my-tweets"){
     getTweets();
@@ -84,8 +77,7 @@ if (firstInput === "my-tweets"){
         getMovie(secondInput);
     }else{
         getMovie("Mr. Nobody");
-    }
-    
+    }   
 }else if(firstInput === "spotify-this-song"){
-    // 
+    getSpotifySong(secondInput); 
 }
