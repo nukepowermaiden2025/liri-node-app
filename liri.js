@@ -77,12 +77,22 @@ var getMovie = function(movieName){
 
 if (firstInput === "my-tweets"){
     getTweets();
-}else if(firstInput ==="movie-this"){
+}
+else if(firstInput ==="movie-this"){
     if(!secondInput===""){
         getMovie(secondInput);
     }else{
         getMovie("Mr. Nobody");
-    }   
-}else if(firstInput === "spotify-this-song"){
-    getSpotifySong(secondInput); 
+    } 
+
+}
+else if(firstInput === "spotify-this-song"){
+    if(!secondInput===""){
+        getSpotifySong(secondInput);
+    }else{
+        getMovie("The Sign");
+    }    
+}
+else if(firstInput ==="do-what-it-says"){
+    getRandomText();
 }
