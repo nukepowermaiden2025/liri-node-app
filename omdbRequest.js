@@ -1,4 +1,4 @@
-
+// Include the request npm package (Don't forget to run "npm install request" in this folder first!)
 var request = require("request");
 
 // Then run a request to the OMDB API with the movie specified
@@ -12,14 +12,3 @@ request("http://www.omdbapi.com/?t=remember+the+titans&y=&plot=short&apikey=tril
     console.log("The movie's rating is: " + JSON.parse(body).imdbRating);
   }
 });
-
-//add code to read and set any environment variables with the dotenv package:
-require("dotenv").config();
-
-keys = require("./keys.js");
-
-var spotify = new Spotify(keys.spotify);
-var client = new Twitter(keys.twitter);
-
-console.log(spotify);
-console.log(twitter);
