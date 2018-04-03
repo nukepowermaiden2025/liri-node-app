@@ -22,14 +22,19 @@ var fs = require("fs");
 // REMEBER this came from the documentation on how to set this up
 //Spotify requires keys which I am calling from another file in the root directory
 //The the example search gives use back spotify data if there is no error
-var getSpotifySong = function(songName){  
+// var getSpotifySong = function(songName){  
+    var getSpotifySong = function(){ 
     let spotify = new Spotify(keys.spotify);                                      //Create Functions for each command
-    spotify.search({ type: 'track', query: songName }, function(err, data) {
+    spotify.search({ type: 'track', query: "Thriller" }, function(err, data) {
         if (err) {
           return console.log('Error occurred: ' + err);
         }
-       
-      console.log(data); 
+       for(let i =0; i<5; i++){
+           for(let j =0; j<data.tracks.items[i].album.artists.length; j++)
+           console.log(data.tracks.items[i].album.artists[j].href);             //Logging out the link to the artist
+     
+       }
+    //   console.log(data.tracks.items); 
       });
 };
 
