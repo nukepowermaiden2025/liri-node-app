@@ -23,17 +23,26 @@ var fs = require("fs");
 //Spotify requires keys which I am calling from another file in the root directory
 //The the example search gives use back spotify data if there is no error
 // var getSpotifySong = function(songName){  
-    var getSpotifySong = function(){ 
+var getSpotifySong = function(songName){ 
     let spotify = new Spotify(keys.spotify);                                      //Create Functions for each command
-    spotify.search({ type: 'track', query: "Thriller" }, function(err, data) {
+    spotify.search({ type: 'track', query: songName }, function(err, data) {
         if (err) {
           return console.log('Error occurred: ' + err);
         }
        for(let i =0; i<5; i++){
            for(let j =0; j<data.tracks.items[i].album.artists.length; j++)
            console.log(data.tracks.items[i].album.artists[j].href);             //Logging out the link to the artist
-     
-       }
+        //    Artist(s)
+            for(let k =0; k<data.tracks.items[i].album.artists.length; k++)
+            console.log(data.tracks.items[i].album.artists[k].external_urls.spotify); 
+        
+
+        //    The song's name
+           
+        //    A preview link of the song from Spotify
+           
+        //    The album that the song is from
+        }
     //   console.log(data.tracks.items); 
       });
 };
@@ -45,10 +54,13 @@ var getTweets = function(twitterHandle){
     let client = new Twitter(keys.twitter);
     let params = {screen_name: twitterHandle}; //Twitter Handle
     client.get('statuses/user_timeline', params, function(error, tweets, response) {
-        if (!error) {
-            console.log(tweets[0].text);
-            for(var i=0; i < 20; i++){
-                console.log(tweets[i].text);
+        if (!error && response.statusCode === 200) {
+
+            if (!error) {
+                console.log(tweets[0].text);
+                for(var i=0; i < 20; i++){
+                    console.log(tweets[i].text);
+                }
             }
         }
     });
@@ -83,6 +95,9 @@ var getMovie = function(movieName){
 };
 
 var getRandomText = function(txtFile){   
+    if (!error && response.statusCode === 200) {
+
+    }
     
 };
 
@@ -98,20 +113,23 @@ if (firstInput === "my-tweets"){
         getTweets("RealDonaldTrump");
     } 
 }
-else if(firstInput ==="movie-this"){
+else if(firstInput ==="movie-this"){//TODO add if the movie is multiple words
     if(!secondInput===""){
         getMovie(secondInput);
     }else{
         getMovie("Mr. Nobody");
     } 
 }
-// else if(firstInput === "spotify-this-song"){
-//     if(!secondInput===""){
-//         getSpotifySong(secondInput);
-//     }else{
-//         getMovie("The Sign");
-//     }    
-// }
+else if(firstInput === "spotify-this-song"){//TODO add is the song is multiple words
+    if(!secondInput===""){
+        getSpotifySong(secondInput);
+    }else{
+        getSpotifySong("I Want it That Way");
+    }    
+}
 // else if(firstInput ==="do-what-it-says"){
 //     getRandomText();
 // }
+else{
+    console.log("Please enter a valid command");
+}
