@@ -27,24 +27,24 @@ var getSpotifySong = function(songName){
     let spotify = new Spotify(keys.spotify);                                      //Create Functions for each command
     spotify.search({ type: 'track', query: songName }, function(err, data) {
         if (err) {
-          return console.log('Error occurred: ' + err);
+            return console.log('Error occurred: ' + err);
         }
-       for(let i =0; i<5; i++){
-           for(let j =0; j<data.tracks.items[i].album.artists.length; j++)
-           console.log(data.tracks.items[i].album.artists[j].href);             //Logging out the link to the artist
-        //    Artist(s)
-            for(let k =0; k<data.tracks.items[i].album.artists.length; k++)
-            console.log(data.tracks.items[i].album.artists[k].external_urls.spotify); 
-        
-
+       for(let i =0; i<1; i++){
+            // for(let j =0; j<data.tracks.items[i].album.artists.length; j++)
+            // console.log(data.tracks.items[i].album.artists[j].href);             
+            // for(let k =0; k<data.tracks.items[i].album.artists.length; k++)
+            // console.log(data.tracks.items[i].album.artists[k].external_urls.spotify); 
+        // //    Artist(s)
+            console.log(data.tracks.items[i].artists[i].name);
         //    The song's name
-           
+            console.log(data.tracks.items[i].name);  
         //    A preview link of the song from Spotify
-           
+            console.log(data.tracks.items[i].preview_url);
         //    The album that the song is from
-        }
-    //   console.log(data.tracks.items); 
-      });
+            console.log(data.tracks.items[i].album.name);
+        } 
+    });
+
 };
 
 //Testing adding the twitter handle as a user input
@@ -99,7 +99,7 @@ var getRandomText = function(txtFile){
 
     }
     
-};
+}; 
 
 
 
