@@ -45,16 +45,16 @@ var fs = require("fs");
 function getSpotifySong(songName){  
     let spotify = new Spotify(keys.spotify);                                      
     spotify.search({ type: 'track', query: songName }, function(err, data) {
-        if (err) {
-            return console.log('Error occurred: ' + err);
-        }
-        for(let i =0; i<5; i++){
-            console.log("Artist: "+ data.tracks.items[i].artists[i].name);
-            console.log("Song Name: "+ data.tracks.items[i].name);  
-            console.log("Song Preview: "+ data.tracks.items[i].preview_url);
-            console.log("Album Name: "+ data.tracks.items[i].album.name);
-        } 
-    });
+            if (err) {
+                return console.log('Error occurred: ' + err);
+            }
+        for(let i =0; i<1; i++){
+                console.log("Artist: "+ data.tracks.items[i].artists[i].name);
+                console.log("Song Name: "+ data.tracks.items[i].name);  
+                console.log("Song Preview: "+ data.tracks.items[i].preview_url);
+                console.log("Album Name: "+ data.tracks.items[i].album.name);
+            } 
+        });
 };
 
 //Testing adding the twitter handle as a user input
@@ -104,27 +104,30 @@ function getMovie(movieName){
 /////Handle the user inputs with if else statements//////
 
 if (firstInput === "my-tweets"){
-    if(!secondInput===""){
+    // if(!secondInput===""){
         getTweets(secondInput);
-    }else{
-        console.log("You did not enter a twitter handle so here's some POTUS\n")
-        getTweets("RealDonaldTrump");
-    } 
+    // }
+    // else{
+    //     console.log("You did not enter a twitter handle so here's some POTUS\n")
+    //     getTweets("RealDonaldTrump");
+    // } 
 }
 else if(firstInput ==="movie-this"){//TODO add if the movie is multiple words
-    if(!secondInput===""){
+    // if(!secondInput===""){
         getMovie(secondInput);
-    }else{
-        getMovie("Mr. Nobody");
-    } 
-}
+    }
+    // else{
+    //     getMovie("Mr. Nobody");
+    // } 
+// }
 else if(firstInput === "spotify-this-song"){//TODO add is the song is multiple words
-    if(!secondInput===""){
+    // if(!secondInput===""){
         getSpotifySong(secondInput);
-    }else{
-        getSpotifySong("I Want it That Way");
-    }    
-}
+    }
+    // else{
+        // getSpotifySong("I Want it That Way");
+    // }    
+// }
 else if(firstInput ==="do-what-it-says"){
     getRandomText();
 }
