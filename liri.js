@@ -4,9 +4,7 @@
 //Then I need to use fs to read and write  to files
 //Then I need to make functions to call when the user enters certain arguments
 
-//Take the first input from the user as a command.
-//Take the second user input to take multiple words
-// var argv = process.argv.slice(2);
+
 var firstInput = process.argv[2];                                           
 var secondInput = process.argv.slice(3).join(" ");
 console.log(secondInput);
@@ -23,10 +21,6 @@ var fs = require("fs");
 
 ///////Create Functions for each command//////
 
-
-
-//Testing adding the songname for the query as an argument.
-// REMEBER this came from the documentation on how to set this up
 //Spotify requires keys which I am calling from another file in the root directory
 //The the example search gives use back spotify data if there is no error
 function getSpotifySong(songName){  
@@ -44,7 +38,6 @@ function getSpotifySong(songName){
         });
 };
 
-//Testing adding the twitter handle as a user input
 //Twitter Requires that I use api keys which I am calling using a require from another file just like spotify
 //There is a parameter that needs a twitter handle argument so I am going to take that at user input and if no provided i will supply a default just like for movies
 function getTweets(twitterHandle){                                                 
@@ -81,12 +74,12 @@ function getMovie(movieName){
     
 };
 
-// function getRandomText(txtFile){   
-//     if (!error && response.statusCode === 200) {
-//     //TODO
-//     }
+function getRandomText(txtFile){   
+    if (!error && response.statusCode === 200) {
+    //TODO
+    }
     
-// }; 
+}; 
 
 /////Handle the user inputs with if else statements//////
 
