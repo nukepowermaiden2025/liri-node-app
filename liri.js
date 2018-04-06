@@ -75,14 +75,24 @@ function getMovie(movieName){
 };
 
 function getRandomText(txtFile){   
-    if (!error && response.statusCode === 200) {
-    //TODO
-    }
-    
+    fs.readFile("random.txt", "utf8", function(error, data) {
+        // If the code experiences any errors it will log the error to the console.
+        if (error) {
+          return console.log(error);
+        }
+        console.log(data);
+        let dataArr = data.split(",");
+        console.log(dataArr);
+        for(let i =0; i<dataArr.length; i++){
+            if(dataArr[i]==="spotify-this-song"){
+                getSpotifySong(songName);
+            }
+        }
+    });   
 }; 
 
 /////Handle the user inputs with if else statements//////
-
+//TODO- Make these swtich statements
 if (firstInput === "tweets" && !secondInput.length <=0){
     getTweets(secondInput);
 }
@@ -102,9 +112,9 @@ if (firstInput === "spotify-this-song" && secondInput.length <=0){
     getSpotifySong("I Want it That Way");
 }    
 
-// if(firstInput ==="do-what-it-says"){
-//     getRandomText();
-// }
+if(firstInput ==="do-what-it-says"){
+    getRandomText();
+}
 // else{
 //     console.log("Please enter a valid command");
 // }
