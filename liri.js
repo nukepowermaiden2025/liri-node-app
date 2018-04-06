@@ -89,13 +89,13 @@ if (firstInput === "tweets" && !secondInput.length <=0){
 if (firstInput === "tweets" && secondInput.length <= 0){
     getTweets("RealDonaldTrump");
 };
-if(firstInput === "movie-this"  && !secondInput.length <=0){//TODO add if the movie is multiple words
+if(firstInput === "movie-this"  && !secondInput.length <=0){
     getMovie(secondInput);
 }
 if (firstInput === "movie-this"  && secondInput.length <=0){
     getMovie("Mr. Nobody");
 } 
-if(firstInput === "spotify-this-song" && !secondInput.length <=0){//TODO add is the song is multiple words
+if(firstInput === "spotify-this-song" && !secondInput.length <=0){
     getSpotifySong(secondInput);
 }
 if (firstInput === "spotify-this-song" && secondInput.length <=0){ 
