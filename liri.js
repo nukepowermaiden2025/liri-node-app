@@ -8,7 +8,8 @@
 //Take the second user input to take multiple words
 // var argv = process.argv.slice(2);
 var firstInput = process.argv[2];                                           
-var secondInput = process.argv[3];
+var secondInput = process.argv.slice(3).join(" ");
+console.log(secondInput);
 
 
 /////Get the data to process user inputs and install all packages to .json-package/////
@@ -19,20 +20,6 @@ var Twitter = require('twitter');
 var keys = require("./keys.js");
 var request = require("request");
 var fs = require("fs");
-
-//Take in multi-word inputs from the user
-// function secondInput(){                                                     
-//     let arr= [];
-//     let nArr;
-//     for (var i=1; i< argv.length; i++){
-//         arr.push(argv[i]);
-//         nArr = arr.join(" ");
-//         return(nArr);    
-//     }
-// }
-// console.log(firstInput);
-// console.log(secondInput());
-
 
 ///////Create Functions for each command//////
 
@@ -103,34 +90,28 @@ function getMovie(movieName){
 
 /////Handle the user inputs with if else statements//////
 
-if (firstInput === "my-tweets"){
-    // if(!secondInput===""){
-        getTweets(secondInput);
-    // }
-    // else{
-    //     console.log("You did not enter a twitter handle so here's some POTUS\n")
-    //     getTweets("RealDonaldTrump");
-    // } 
+if (firstInput === "tweets" && !secondInput.length <=0){
+    getTweets(secondInput);
 }
-else if(firstInput ==="movie-this"){//TODO add if the movie is multiple words
-    // if(!secondInput===""){
-        getMovie(secondInput);
-    }
-    // else{
-    //     getMovie("Mr. Nobody");
-    // } 
+if (firstInput === "tweets" && secondInput.length <= 0){
+    getTweets("RealDonaldTrump");
+};
+if(firstInput === "movie-this"  && !secondInput.length <=0){//TODO add if the movie is multiple words
+    getMovie(secondInput);
+}
+if (firstInput === "movie-this"  && secondInput.length <=0){
+    getMovie("Mr. Nobody");
+} 
+if(firstInput === "spotify-this-song" && !secondInput.length <=0){//TODO add is the song is multiple words
+    getSpotifySong(secondInput);
+}
+if (firstInput === "spotify-this-song" && secondInput.length <=0){ 
+    getSpotifySong("I Want it That Way");
+}    
+
+// if(firstInput ==="do-what-it-says"){
+//     getRandomText();
 // }
-else if(firstInput === "spotify-this-song"){//TODO add is the song is multiple words
-    // if(!secondInput===""){
-        getSpotifySong(secondInput);
-    }
-    // else{
-        // getSpotifySong("I Want it That Way");
-    // }    
+// else{
+//     console.log("Please enter a valid command");
 // }
-else if(firstInput ==="do-what-it-says"){
-    getRandomText();
-}
-else{
-    console.log("Please enter a valid command");
-}

@@ -6,9 +6,8 @@
 
 //Take the first input from the user as a command.
 //Take the second user input to take multiple words
-// var argv = process.argv.slice(2);
-var firstInput = process.argv[2];                                           
-var secondInput = process.argv[3];
+// var argv = process.argv.slice(2
+
 
 
 /////Get the data to process user inputs and install all packages to .json-package/////
@@ -48,11 +47,12 @@ function getSpotifySong(songName){
             if (err) {
                 return console.log('Error occurred: ' + err);
             }
-        for(let i =0; i<1; i++){
+        for(let i =0; i<5; i++){
                 console.log("Artist: "+ data.tracks.items[i].artists[i].name);
                 console.log("Song Name: "+ data.tracks.items[i].name);  
                 console.log("Song Preview: "+ data.tracks.items[i].preview_url);
                 console.log("Album Name: "+ data.tracks.items[i].album.name);
+                console.log("\n");
             } 
         });
 };
@@ -104,13 +104,13 @@ function getMovie(movieName){
 /////Handle the user inputs with if else statements//////
 
 if (firstInput === "my-tweets"){
-    // if(!secondInput===""){
+    if(!secondInput===""){
         getTweets(secondInput);
-    // }
-    // else{
-    //     console.log("You did not enter a twitter handle so here's some POTUS\n")
-    //     getTweets("RealDonaldTrump");
-    // } 
+    }
+    else{
+        console.log("You did not enter a twitter handle so here's some POTUS\n")
+        getTweets("RealDonaldTrump");
+    } 
 }
 else if(firstInput ==="movie-this"){//TODO add if the movie is multiple words
     // if(!secondInput===""){
