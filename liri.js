@@ -42,15 +42,14 @@ function getSpotifySong(songName){
 //There is a parameter that needs a twitter handle argument so I am going to take that at user input and if no provided i will supply a default just like for movies
 function getTweets(twitterHandle){                                                 
     let client = new Twitter(keys.twitter);
-    let params = {screen_name: twitterHandle}; //Twitter Handle
+    let params = {screen_name: twitterHandle}; 
     client.get('statuses/user_timeline', params, function(error, tweets, response) {
         if (!error && response.statusCode === 200) {
             for(var i=0; i < 20; i++){
-                console.log(tweets[i].text);
+                console.log(i +")   "+ tweets[i].text +"\n");
             }   
         }
     });
-    // console.log(response);
 };
 
 // Then run a request to the OMDB API with the movie specified
@@ -66,9 +65,19 @@ function getMovie(movieName){
             console.log("Language: "+ JSON.parse(body).Language);
             console.log("Plot: "+ JSON.parse(body).Plot);
             console.log("Actors: "+ JSON.parse(body).Actors);
+
+            // console.log(
+            // `Title: ${JSON.parse(body).Title}
+            // Year:  ${JSON.parse(body).Year}
+            // Rating: ${JSON.parse(body).imdbRating}
+            // Rotten Tomatoes Rating: ${JSON.parse(body).Ratings[1].Value}
+            // Countrys Released: ${JSON.parse(body).Country}
+            // Language: ${JSON.parse(body).Language}
+            // Plot: ${JSON.parse(body).Plot}
+            // Actors: ${JSON.parse(body).Actors}`);
         }else{
             console.log(error)
-            // console.log("You did not enter a valid movie name");
+            console.log("You did not enter a valid movie name");
         }
     });
     
@@ -82,19 +91,12 @@ function getRandomText(txtFile){
         }else{
             console.log(data.toString());
         }
-       
-        // let dataArr = data.split(",");
-        // console.log(dataArr);
-        // for(let i =0; i<dataArr.length; i++){
-        //     if(dataArr[i]==="spotify-this-song"){
-        //         getSpotifySong(songName);
-        //     }
-        // }
     });   
 }; 
 
 /////Handle the user inputs with if else statements//////
 //TODO- Make these swtich statements
+
 if (firstInput === "tweets" && !secondInput.length <=0){
     getTweets(secondInput);
 }
