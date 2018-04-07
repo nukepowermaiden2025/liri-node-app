@@ -75,19 +75,21 @@ function getMovie(movieName){
 };
 
 function getRandomText(txtFile){   
-    fs.readFile("random.txt", "utf8", function(error, data) {
+    fs.readFile(txtFile, "utf8", function(error, data) {
         // If the code experiences any errors it will log the error to the console.
         if (error) {
-          return console.log(error);
+            console.log(error);
+        }else{
+            console.log(data.toString());
         }
-        console.log(data);
-        let dataArr = data.split(",");
-        console.log(dataArr);
-        for(let i =0; i<dataArr.length; i++){
-            if(dataArr[i]==="spotify-this-song"){
-                getSpotifySong(songName);
-            }
-        }
+       
+        // let dataArr = data.split(",");
+        // console.log(dataArr);
+        // for(let i =0; i<dataArr.length; i++){
+        //     if(dataArr[i]==="spotify-this-song"){
+        //         getSpotifySong(songName);
+        //     }
+        // }
     });   
 }; 
 
@@ -113,7 +115,7 @@ if (firstInput === "spotify-this-song" && secondInput.length <=0){
 }    
 
 if(firstInput ==="do-what-it-says"){
-    getRandomText();
+    getRandomText(secondInput);
 }
 // else{
 //     console.log("Please enter a valid command");
