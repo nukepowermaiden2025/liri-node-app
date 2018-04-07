@@ -26,16 +26,16 @@ var fs = require("fs");
 function getSpotifySong(songName){  
     let spotify = new Spotify(keys.spotify);                                      
     spotify.search({ type: 'track', query: songName }, function(err, data) {
-            if (err) {
-                return console.log('Error occurred: ' + err);
-            }
+        if (err) {
+            return console.log('Error occurred: ' + err);
+        }
         for(let i =0; i<1; i++){
-                console.log("Artist: "+ data.tracks.items[i].artists[i].name);
-                console.log("Song Name: "+ data.tracks.items[i].name);  
-                console.log("Song Preview: "+ data.tracks.items[i].preview_url);
-                console.log("Album Name: "+ data.tracks.items[i].album.name);
-            } 
-        });
+            console.log("Artist: "+ data.tracks.items[i].artists[i].name);
+            console.log("Song Name: "+ data.tracks.items[i].name);  
+            console.log("Song Preview: "+ data.tracks.items[i].preview_url);
+            console.log("Album Name: "+ data.tracks.items[i].album.name);
+        } 
+    });
 };
 
 //Twitter Requires that I use api keys which I am calling using a require from another file just like spotify
@@ -57,14 +57,35 @@ function getMovie(movieName){
     request("http://www.omdbapi.com/?t=" + movieName+ "&y=&plot=short&apikey=trilogy", function(error, response, body) {
         // If the request is successful (i.e. if the response status code is 200)
         if (!error && response.statusCode === 200) {
-            console.log("Title: " + JSON.parse(body).Title);
-            console.log("Year: " + JSON.parse(body).Year);
-            console.log("Rating: " + JSON.parse(body).imdbRating);
+            if(JSON.parse(body).Title){
+                console.log("Title: " + JSON.parse(body).Title);
+            }
+            if(JSON.parse(body).Year){
+                console.log("Year: " + JSON.parse(body).Year);
+            }
+            if(JSON.parse(body).imdbRating){
+                console.log("Rating: " + JSON.parse(body).imdbRating);
+            }
             console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
-            console.log("Countrys Released: "+ JSON.parse(body).Country);
-            console.log("Language: "+ JSON.parse(body).Language);
-            console.log("Plot: "+ JSON.parse(body).Plot);
-            console.log("Actors: "+ JSON.parse(body).Actors);
+            // for(var i=0; i <JSON.parse(body).Ratings.length; i++){
+            //     if(body.Ratings[i].Value==="Rotten Tomatoes"){
+            //         console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[i].Value);
+            //     }
+            // }
+            
+            if(JSON.parse(body).Country){
+                console.log("Countrys Released: "+ JSON.parse(body).Country);
+            }
+            if(JSON.parse(body).Language){
+                console.log("Language: "+ JSON.parse(body).Language);   
+            }
+            if(JSON.parse(body).Plot){
+                console.log("Plot: "+ JSON.parse(body).Plot);
+            }
+            if(JSON.parse(body).Actors){
+                console.log("Actors: "+ JSON.parse(body).Actors);
+            }
+            
 
             // console.log(
             // `Title: ${JSON.parse(body).Title}
@@ -94,31 +115,30 @@ function getRandomText(txtFile){
     });   
 }; 
 
-/////Handle the user inputs with if else statements//////
-//TODO- Make these swtich statements
+/////Handle the user inputs with if statements//////
 
 if (firstInput === "tweets" && !secondInput.length <=0){
     getTweets(secondInput);
 }
 if (firstInput === "tweets" && secondInput.length <= 0){
     getTweets("RealDonaldTrump");
-};
+}
 if(firstInput === "movie-this"  && !secondInput.length <=0){
     getMovie(secondInput);
 }
 if (firstInput === "movie-this"  && secondInput.length <=0){
     getMovie("Mr. Nobody");
-} 
+}
 if(firstInput === "spotify-this-song" && !secondInput.length <=0){
     getSpotifySong(secondInput);
 }
 if (firstInput === "spotify-this-song" && secondInput.length <=0){ 
     getSpotifySong("I Want it That Way");
-}    
+}  
 
 if(firstInput ==="do-what-it-says"){
     getRandomText(secondInput);
 }
-// else{
-//     console.log("Please enter a valid command");
-// }
+if(!firstInput){
+    console.log("Oops, Looks like you did not enter a valid command");
+};
