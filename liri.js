@@ -45,8 +45,11 @@ function getTweets(twitterHandle){
     let params = {screen_name: twitterHandle}; 
     client.get('statuses/user_timeline', params, function(error, tweets, response) {
         if (!error && response.statusCode === 200) {
-            for(var i=0; i < 20; i++){
-                console.log(i +")   "+ tweets[i].text +"\n");
+            for(var i=1; i < 20; i++){
+                console.log(i +")   "+ tweets[i].text +"\n" +
+                "Tweeted at: " + tweets[i].created_at +"\n");
+
+                // console.log(i +")   "+ JSON.stringify(tweets[i],null,2)  +"\n");
             }   
         }
     });
